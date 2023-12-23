@@ -9,7 +9,6 @@ class MoveCommand(val speed: Int, var position: PositionProperty, val direction:
 
     override suspend fun execute() {
         position.coordinates = position.coordinates + (direction.coord * speed)
-        println(position)
     }
 
     override suspend fun undo() {

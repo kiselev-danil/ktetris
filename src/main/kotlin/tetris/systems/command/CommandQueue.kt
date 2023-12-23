@@ -13,7 +13,6 @@ class CommandQueue: ICommand {
             queue.first().execute()
             executed.add(executed.lastIndex + 1, queue.first())
             queue.removeAt(0)
-            println("cmd executed")
         }
     }
 

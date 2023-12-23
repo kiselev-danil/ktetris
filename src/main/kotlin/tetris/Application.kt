@@ -11,17 +11,17 @@ import org.koin.core.context.GlobalContext
 import org.koin.core.context.startKoin
 import tetris.component.PositionProperty
 import tetris.component.DrawProperty
+import tetris.component.MoveProperty
 import tetris.systems.DefaultDrawSystem
 import tetris.systems.GameSystem
+import tetris.systems.MoveSystem
+import tetris.systems.command.CommandQueue
 
 
 open class Application {
-
     companion object {
-
         @JvmStatic
         fun main(args: Array<String>) = runBlocking {
-
             startKoin {
                 modules(commonDIModule)
             }
@@ -34,40 +34,43 @@ open class Application {
             val circlePattern: Set<Pair<Int, Int>> =
                 setOf(Pair(0, 0), Pair(1, 0), Pair(2, 0), Pair(2, 1), Pair(2, 2), Pair(1, 2), Pair(0, 2), Pair(0, 1))
 
-            var drawSystem: DefaultDrawSystem = GlobalContext.get().get()
+
             val gameObject = GameObject(null)
+
             var position = PositionProperty(gameObject, Coord(15, 10))
             var drawProperty = DrawProperty(gameObject, circlePattern)
             drawProperty.bgColor = TextColor.ANSI.BLUE
+
+            var moveProperty: MoveProperty = MoveProperty(gameObject, MovementDirection.Down)
+            moveProperty.speed = 1
+
             gameObject.addProperty("drawable", drawProperty)
             gameObject.addProperty("position", position)
+            gameObject.addProperty("move", moveProperty)
 //            gameObject.props["drawable"]?.let { drawSystem.addComponent(it) }
-
+            val queue : CommandQueue = GlobalContext.get().get()
             terminal.clearScreen()
             var isRunning = true
-            terminal.enterPrivateMode()
-            launch { drawCorut(drawSystem) }
-            while (isRunning) {
-                drawSystem.run()
-                if (position.coordinates.x < 30) {
-                    position.coordinates.x++
-                } else {
-                    drawProperty.turnOff()
+            launch { runSys() }
+            launch {
+                while (isRunning) {
+                    delay(1000L)
+                    queue.execute()
                 }
-                Thread.sleep(100)
             }
-            terminal.exitPrivateMode()
-
+            println("That's end folks")
         }
 
-        private suspend fun drawCorut(sys: GameSystem) {
+        private suspend fun runSys() {
+            val drawSystem: DefaultDrawSystem = GlobalContext.get().get()
+            val moveSystem: MoveSystem = GlobalContext.get().get()
             // launch a new coroutine and continue
             while (true) {
                 delay(16L) // non-blocking delay for 1 second (default time unit is ms)
-                sys.run()
+                moveSystem.run()
+                drawSystem.run()
             }
 
         }
-
     }
 }

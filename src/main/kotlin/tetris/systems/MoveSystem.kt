@@ -7,8 +7,8 @@ import tetris.component.DrawProperty
 import tetris.component.GameProperty
 import tetris.component.MoveProperty
 import tetris.component.PositionProperty
-import tetris.systems.command.CommandQueue
-import tetris.systems.command.MoveCommand
+import tetris.command.CommandQueue
+import tetris.command.MoveCommand
 import java.lang.Exception
 
 class MoveSystem : GameSystem {

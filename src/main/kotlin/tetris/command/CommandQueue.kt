@@ -1,4 +1,4 @@
-package tetris.systems.command
+package tetris.command
 
 class CommandQueue: ICommand {
     private var queue: MutableList<ICommand> = ArrayList<ICommand>()

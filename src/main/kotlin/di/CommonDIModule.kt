@@ -6,7 +6,7 @@ import com.googlecode.lanterna.terminal.Terminal
 import org.koin.dsl.module
 import tetris.systems.DefaultDrawSystem
 import tetris.systems.MoveSystem
-import tetris.systems.command.CommandQueue
+import tetris.command.CommandQueue
 
 val commonDIModule = module {
     single<Terminal> { DefaultTerminalFactory().createTerminal() }

@@ -15,7 +15,7 @@ import tetris.component.DrawProperty
 import tetris.component.MoveProperty
 import tetris.systems.DefaultDrawSystem
 import tetris.systems.MoveSystem
-import tetris.systems.command.CommandQueue
+import tetris.command.CommandQueue
 import kotlin.concurrent.thread
 
 

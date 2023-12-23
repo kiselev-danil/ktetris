@@ -1,4 +1,4 @@
-package tetris.systems.command
+package tetris.command
 
 import common.Coord
 import tetris.MovementDirection

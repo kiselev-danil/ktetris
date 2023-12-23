@@ -1,4 +1,4 @@
-package tetris.systems.command
+package tetris.command
 
 interface ICommand {
     suspend fun execute()

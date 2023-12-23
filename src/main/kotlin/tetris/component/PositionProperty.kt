@@ -3,7 +3,7 @@ package tetris.component
 import tetris.GameObject
 import tetris.PropertyType
 
-data class PositionProperty(val parent: GameObject, var value: Pair<Int, Int> = Pair(0, 0)) : GameProperty {
+data class PositionProperty(val parent: GameObject, var x: Int = 0, var y: Int = 0) : GameProperty {
     private var activeState: Boolean = true
 
     override fun getType(): PropertyType {

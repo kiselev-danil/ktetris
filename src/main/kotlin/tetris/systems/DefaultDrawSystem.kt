@@ -47,7 +47,7 @@ class DefaultDrawSystem : GameSystem {
     private fun getPos(component: DrawProperty): Pair<Int, Int> {
         if (component.parent.props["position"] != null) {
             if (component.parent.props["position"]?.getType() == PropertyType.PositionProperty) {
-                return Pair((component.parent.props["position"] as PositionProperty).x, (component.parent.props["position"] as PositionProperty).y)
+                return Pair((component.parent.props["position"] as PositionProperty).coordinates.x, (component.parent.props["position"] as PositionProperty).coordinates.y)
             } else {
                 throw Exception("GameObject must contain Position property")
             }

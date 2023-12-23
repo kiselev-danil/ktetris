@@ -2,6 +2,7 @@ package tetris
 
 import com.googlecode.lanterna.TextColor
 import com.googlecode.lanterna.terminal.Terminal
+import common.Coord
 import di.commonDIModule
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -35,7 +36,7 @@ open class Application {
 
             var drawSystem: DefaultDrawSystem = GlobalContext.get().get()
             val gameObject = GameObject(null)
-            var position = PositionProperty(gameObject, 15, 10)
+            var position = PositionProperty(gameObject, Coord(15, 10))
             var drawProperty = DrawProperty(gameObject, circlePattern)
             drawProperty.bgColor = TextColor.ANSI.BLUE
             gameObject.addProperty("drawable", drawProperty)
@@ -48,8 +49,8 @@ open class Application {
             launch { drawCorut(drawSystem) }
             while (isRunning) {
                 drawSystem.run()
-                if (position.x < 30) {
-                    position.x++
+                if (position.coordinates.x < 30) {
+                    position.coordinates.x++
                 } else {
                     drawProperty.turnOff()
                 }

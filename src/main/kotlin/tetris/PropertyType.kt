@@ -1,5 +1,5 @@
 package tetris
 
 enum class PropertyType {
-    Drawable, Movable, Collisionable, Position
+    DrawProperty, MoveProperty, CollisionProperty, PositionProperty
 }

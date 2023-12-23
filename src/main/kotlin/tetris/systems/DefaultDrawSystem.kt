@@ -14,7 +14,7 @@ class DefaultDrawSystem : GameSystem {
     private var defaultBGColor: TextColor = GlobalContext.get().get()
     private val terminal: Terminal = GlobalContext.get().get()
     override fun addComponent(component: GameProperty) {
-        if (component.getType() == PropertyType.Drawable) {
+        if (component.getType() == PropertyType.DrawProperty) {
             this.props.add(component as DrawProperty)
         } else {
             terminal.setCursorPosition(0, 0)
@@ -46,7 +46,7 @@ class DefaultDrawSystem : GameSystem {
 
     private fun getPos(component: DrawProperty): Pair<Int, Int> {
         if (component.parent.props["position"] != null) {
-            if (component.parent.props["position"]?.getType() == PropertyType.Position) {
+            if (component.parent.props["position"]?.getType() == PropertyType.PositionProperty) {
                 print("position is ${(component.parent.props["position"] as PositionProperty).value}\n")
                 return (component.parent.props["position"] as PositionProperty).value
             } else {

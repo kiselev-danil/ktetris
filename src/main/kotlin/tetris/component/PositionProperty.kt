@@ -7,7 +7,7 @@ data class PositionProperty(val parent: GameObject, var value: Pair<Int, Int> = 
     private var activeState: Boolean = true
 
     override fun getType(): PropertyType {
-        return PropertyType.Position
+        return PropertyType.PositionProperty
     }
 
     override fun turnOn() {
